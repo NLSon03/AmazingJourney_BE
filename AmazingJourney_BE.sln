@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Api", "AmazingJourney.Api\AmazingJourney.Api.csproj", "{2C659C5D-DD5D-4669-BE3B-1B463819A505}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Application", "AmazingJourney.Application\AmazingJourney.Application.csproj", "{52273076-19C8-491D-A035-5E62E51EC6D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Domain", "AmazingJourney.Domain\AmazingJourney.Domain.csproj", "{240C2E20-0011-4934-A804-2404FE8C9DB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Infrastructure", "AmazingJourney.Infrastructure\AmazingJourney.Infrastructure.csproj", "{B606EC3F-80C5-4183-8FD1-1D362D2E920E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Tests.Unit", "AmazingJourney.Tests.Unit\AmazingJourney.Tests.Unit.csproj", "{BEB523D0-B14B-40F1-8A5D-BEE884242771}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Tests.Integration", "AmazingJourney.Tests.Integration\AmazingJourney.Tests.Integration.csproj", "{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C659C5D-DD5D-4669-BE3B-1B463819A505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C659C5D-DD5D-4669-BE3B-1B463819A505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C659C5D-DD5D-4669-BE3B-1B463819A505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C659C5D-DD5D-4669-BE3B-1B463819A505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52273076-19C8-491D-A035-5E62E51EC6D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52273076-19C8-491D-A035-5E62E51EC6D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52273076-19C8-491D-A035-5E62E51EC6D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52273076-19C8-491D-A035-5E62E51EC6D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{240C2E20-0011-4934-A804-2404FE8C9DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{240C2E20-0011-4934-A804-2404FE8C9DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{240C2E20-0011-4934-A804-2404FE8C9DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{240C2E20-0011-4934-A804-2404FE8C9DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B606EC3F-80C5-4183-8FD1-1D362D2E920E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B606EC3F-80C5-4183-8FD1-1D362D2E920E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B606EC3F-80C5-4183-8FD1-1D362D2E920E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B606EC3F-80C5-4183-8FD1-1D362D2E920E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB523D0-B14B-40F1-8A5D-BEE884242771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB523D0-B14B-40F1-8A5D-BEE884242771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB523D0-B14B-40F1-8A5D-BEE884242771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB523D0-B14B-40F1-8A5D-BEE884242771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12A4D1D6-F2B5-48A9-9F85-58C2AE0F7DFB}
+	EndGlobalSection
+EndGlobal
