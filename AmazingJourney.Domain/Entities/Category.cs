@@ -4,6 +4,7 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
 {
     public class Category
     {
+        [Required]
         public int Id { get; set; }
 
         [StringLength(50)]
@@ -11,6 +12,6 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         public string? Description { get; set; }
 
         // Navigation properties
-        public ICollection<Hotel> Hotels { get; set; }
+        public ICollection<Hotel>? Hotels { get; set; }
     }
 }

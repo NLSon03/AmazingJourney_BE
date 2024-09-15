@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="Mappers\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 

@@ -9,6 +9,7 @@ namespace AmazingJourney.Api.Controllers
     [ApiController]
     public class LocationController : ControllerBase
     {
+
         private readonly ILocationService _locationService;
 
         public LocationController(ILocationService locationService)

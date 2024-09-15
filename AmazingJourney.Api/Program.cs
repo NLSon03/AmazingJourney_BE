@@ -9,16 +9,18 @@ using AmazingJourney.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
 // Đăng ký ICategoryService
 builder.Services.AddMvc();
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<IHotelService, HotelService>();
 
+// Add services to the container.
+builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
