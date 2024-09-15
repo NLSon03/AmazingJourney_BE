@@ -77,7 +77,7 @@ namespace AmazingJourney.Api.Controllers
             if (!result)
                 return NotFound();
 
-            return Ok(category);
+            return Ok($"Deleted successfully CategoryId: { category.Id}");
         }
     }
 

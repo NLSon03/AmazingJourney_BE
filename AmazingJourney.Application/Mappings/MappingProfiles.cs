@@ -16,6 +16,10 @@ namespace AmazingJourney.Application.Mappings
             // Map CategoryDTO to Category entity and vice versa
             CreateMap<CategoryDTO, Category>();
             CreateMap<Category, CategoryDTO>();
+
+            // Map LocationDTO to Location entity and vice versa
+            CreateMap<LocationDTO, Location>();
+            CreateMap<Location, LocationDTO>();
         }
     }
 }

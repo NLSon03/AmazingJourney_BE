@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using AmazingJourney.Application.Mappings;
 using AutoMapper;
+using AmazingJourney.Application.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddMvc();
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
