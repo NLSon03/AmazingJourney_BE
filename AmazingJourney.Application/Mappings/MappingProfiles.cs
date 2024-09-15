@@ -24,6 +24,10 @@ namespace AmazingJourney.Application.Mappings
             // Map HotelDTO to Hotel entity and vice versa
             CreateMap<HotelDTO, Hotel>();
             CreateMap<Hotel, HotelDTO>();
+
+            // Map HotelImageDTO to HotelImage entity and vice versa
+            CreateMap<HotelImageDTO, HotelImage>();
+            CreateMap<HotelImage, HotelImageDTO>();
         }
     }
 }
