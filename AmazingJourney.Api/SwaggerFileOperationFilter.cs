@@ -1,5 +1,8 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
+using System.Collections.Generic;
+using AmazingJourney.Application.DTOs;
 
 public class FileUploadOperationFilter : IOperationFilter
 {
@@ -25,12 +28,9 @@ public class FileUploadOperationFilter : IOperationFilter
                                     Type = "string",
                                     Format = "binary"
                                 },
-                                ["hotelId"] = new OpenApiSchema
-                                {
-                                    Type = "integer"
-                                }
+                                ["roomDto"] = context.SchemaGenerator.GenerateSchema(typeof(RoomDTO), context.SchemaRepository)
                             },
-                            Required = new HashSet<string> { "file", "hotelId" }
+                            Required = new HashSet<string> { "file", "roomDto" }
                         }
                     }
                 }

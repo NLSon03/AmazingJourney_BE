@@ -7,7 +7,9 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         [Required]
         public int Id { get; set; }
         public int HotelId { get; set; }
-        public string? RoomType { get; set; }
+
+        [Required]
+        public string RoomType { get; set; }
         public decimal PricePerNight { get; set; }
         public int Capacity { get; set; }
         public bool Availability { get; set; }

@@ -25,6 +25,17 @@ namespace AmazingJourney.Api.Controllers
             return Ok(hotels);
         }
 
+        [HttpGet("GetHotelWithImage/{id}")]
+        public async Task<IActionResult> GetHotelWithImages(int id)
+        {
+            var hotel = await _hotelService.GetHotelWithImagesByIdAsync(id);
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+            return Ok(hotel);
+        }
+
         // GET: api/Hotel/5
         [HttpGet("GetHotelById/{id}")]
         public async Task<IActionResult> GetHotelById(int id)

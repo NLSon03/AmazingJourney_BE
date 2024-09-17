@@ -21,9 +21,22 @@ namespace AmazingJourney.Application.Mappings
             CreateMap<LocationDTO, Location>();
             CreateMap<Location, LocationDTO>();
 
-            // Map HotelDTO to Hotel entity and vice versa
+            // Hotel mapping
+            CreateMap<Hotel, HotelDTO>()
+                .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.HotelImages))
+                .ForMember(dest => dest.Rooms, opt => opt.MapFrom(src => src.Rooms));  // Map phòng
+
+            CreateMap<HotelImage, HotelImageDTO>();
             CreateMap<HotelDTO, Hotel>();
-            CreateMap<Hotel, HotelDTO>();
+            CreateMap<HotelImageDTO, HotelImage>();
+
+            // Room mapping
+            CreateMap<Room, RoomDTO>();
+             //   .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.RoomImages));  // Map hình ảnh phòng
+
+            CreateMap<RoomImage, RoomImageDTO>();
+            CreateMap<RoomDTO, Room>();
+            CreateMap<RoomImageDTO, RoomImage>();
 
             // Map HotelImageDTO to HotelImage entity and vice versa
             CreateMap<HotelImageDTO, HotelImage>();

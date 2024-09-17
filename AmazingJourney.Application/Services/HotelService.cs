@@ -25,15 +25,28 @@ namespace AmazingJourney.Application.Services
 
         public async Task<IEnumerable<HotelDTO>> GetAllHotelsAsync()
         {
-            var hotels = await _context.Hotels.ToListAsync();
+            var hotels = await _context.Hotels.Include(h => h.HotelImages).Include(h => h.Rooms).ThenInclude(r=>r.RoomImages).ToListAsync();
 
-            if(hotels == null)
+            if (hotels == null)
             {
                 return null;
             }
             return _mapper.Map<IEnumerable<HotelDTO>>(hotels);
         }
 
+        // Sử dụng Include để tải kèm dữ liệu bảng liên quan
+        public async Task<HotelDTO> GetHotelWithImagesByIdAsync(int hotelId)
+        {
+            var hotel = await _context.Hotels
+         .Include(h => h.HotelImages) // Bao gồm hình ảnh của khách sạn
+         .Include(h => h.Rooms)       // Bao gồm danh sách phòng
+         .ThenInclude(r => r.RoomImages) // Bao gồm hình ảnh của từng phòng
+         .FirstOrDefaultAsync(h => h.Id == hotelId);
+
+            return _mapper.Map<HotelDTO>(hotel);
+        }
+
+        // Lấy khách sạn không bao gồm hình ảnh (nếu cần)
         public async Task<HotelDTO> GetHotelByIdAsync(int id)
         {
             var hotel = await _context.Hotels.FindAsync(id);
@@ -48,7 +61,9 @@ namespace AmazingJourney.Application.Services
             return _mapper.Map<HotelDTO>(hotel);
         }
 
-        public async Task<HotelDTO> UpdateHotelAsync(int id, HotelDTO hotelDto)
+
+       // Cập nhật khách sạn
+      public async Task<HotelDTO> UpdateHotelAsync(int id, HotelDTO hotelDto)
         {
             var hotel = await _context.Hotels.FindAsync(id);
             if (hotel == null)
@@ -61,6 +76,7 @@ namespace AmazingJourney.Application.Services
             return _mapper.Map<HotelDTO>(hotel);
         }
 
+        // Xóa khách sạn
         public async Task<bool> DeleteHotelAsync(int id)
         {
             var hotel = await _context.Hotels.FindAsync(id);
@@ -72,29 +88,41 @@ namespace AmazingJourney.Application.Services
             return true;
         }
 
+        // Tìm kiếm khách sạn theo tên
         public async Task<IEnumerable<HotelDTO>> GetHotelByNameAsync(string name)
         {
             var hotels = await _context.Hotels
+                .Include(h => h.HotelImages)  // Bao gồm hình ảnh
                 .Where(h => h.Name.Contains(name))
                 .ToListAsync();
+
             return _mapper.Map<IEnumerable<HotelDTO>>(hotels);
         }
+
+        // Lấy danh sách khách sạn theo Category
         public async Task<IEnumerable<HotelDTO>> GetListHotelByCategoryId(int categoryId)
         {
             var hotels = await _context.Hotels
+                .Include(h => h.HotelImages)  // Bao gồm hình ảnh
                 .Where(h => h.CategoryId == categoryId)
                 .ToListAsync();
+
             return _mapper.Map<IEnumerable<HotelDTO>>(hotels);
         }
 
+        // Lấy danh sách khách sạn theo Location
         public async Task<IEnumerable<HotelDTO>> GetListHotelByLocationId(int locationId)
         {
             var hotels = await _context.Hotels
+                .Include(h => h.HotelImages)  // Bao gồm hình ảnh
                 .Where(h => h.LocationId == locationId)
                 .ToListAsync();
+
             return _mapper.Map<IEnumerable<HotelDTO>>(hotels);
         }
-
-      
+        Task<HotelDTO> IHotelService.GetHotelWithImagesByIdAsync(int hotelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,8 +10,9 @@ namespace AmazingJourney.Application.Interfaces
     public interface IHotelService
     {
         Task<IEnumerable<HotelDTO>> GetAllHotelsAsync();
-        Task<HotelDTO> GetHotelByIdAsync(int id);    
-        Task<IEnumerable<HotelDTO>> GetHotelByNameAsync(string name);
+        Task<HotelDTO> GetHotelByIdAsync(int id);
+        Task<HotelDTO> GetHotelWithImagesByIdAsync(int hotelId);
+        Task<IEnumerable<HotelDTO>> GetHotelByNameAsync(string name);   
 
         Task<IEnumerable<HotelDTO>> GetListHotelByCategoryId(int categoryId);
 
