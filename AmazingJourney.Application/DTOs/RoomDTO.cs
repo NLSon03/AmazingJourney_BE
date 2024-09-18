@@ -11,15 +11,18 @@ namespace AmazingJourney.Application.DTOs
     {
         [Required]
         public int Id { get; set; }
+
+        [Required]
         public int HotelId { get; set; }
 
         [Required]
         public string RoomType { get; set; }
+
         public decimal PricePerNight { get; set; }
         public int Capacity { get; set; }
         public bool Availability { get; set; }
 
         // Thêm danh sách các ảnh liên quan đến phòng
-      //  public List<RoomImageDTO> Images { get; set; } = new List<RoomImageDTO>();
+        public List<RoomImageDTO> Images { get; set; } = new List<RoomImageDTO>();
     }
 }

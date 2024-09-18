@@ -12,14 +12,17 @@ namespace AmazingJourney.Application.Interfaces
     {
         Task<IEnumerable<RoomDTO>> GetAllRoomsAsync();
         Task<RoomDTO> GetRoomByIdAsync(int id);
-
+        // Phương thức lưu file ảnh
+        Task<string> SaveRoomImageAsync(IFormFile file);
         Task<RoomDTO> GetRoomWithImagesByIdAsync(int roomId);
         Task<IEnumerable<RoomDTO>> GetRoomsByHotelIdAsync(int hotelId);
+        // Phương thức tạo phòng
         Task<RoomDTO> CreateRoomAsync(RoomDTO roomDto);
-        Task<string> SaveRoomImageAsync(IFormFile file);
 
-        // Phương thức thêm ảnh cho phòng
+        // Phương thức thêm ảnh phòng
         Task AddRoomImageAsync(RoomImageDTO roomImageDto);
+
+        
         Task<RoomDTO> UpdateRoomAsync(int id, RoomDTO roomDto);
         Task<bool> DeleteRoomAsync(int id);
     }

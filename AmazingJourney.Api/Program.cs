@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "AmazingJourney.Api", Version = "v1" });
 
     // Cấu hình hỗ trợ multipart/form-data cho các endpoint có upload file
-    c.OperationFilter<FileUploadOperationFilter>();
+    c.OperationFilter<SwaggerFileOperationFilter>();
 });
 
 builder.Services.AddSwaggerGen();
@@ -54,8 +54,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
+
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Room API v1");
+    });
 }
 
 app.UseHttpsRedirection();

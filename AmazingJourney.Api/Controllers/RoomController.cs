@@ -44,47 +44,48 @@ namespace AmazingJourney.Api.Controllers
             return Ok(rooms);
         }
 
-        // Tạo phòng mới
-        /* [HttpPost]
-         public async Task<IActionResult> CreateRoom([FromBody] RoomDTO roomDto)
-         {
-             if (!ModelState.IsValid)
-                 return BadRequest(ModelState);
-
-             var room = await _roomService.CreateRoomAsync(roomDto);
-             return CreatedAtAction(nameof(GetRoomWithImages), new { id = room.Id }, room);
-         }
-        */
-
-        [HttpPost("UploadFile")]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> CreateRoomWithImage([FromForm] RoomDTO roomDto, [FromForm] IFormFile file)
+        [HttpPost("CreateRoom")]
+        public async Task<IActionResult> CreateRoom([FromBody] RoomDTO roomDto)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
-
-            // Lưu ảnh nếu có file upload
-            string filePath = null;
-            if (file != null)
-            {
-                filePath = await _roomService.SaveRoomImageAsync(file);
             }
 
-            // Tạo phòng
-            var room = await _roomService.CreateRoomAsync(roomDto);
+            var createdRoom = await _roomService.CreateRoomAsync(roomDto);
+            return Ok(createdRoom);
+        }
 
-            // Lưu thông tin RoomImage nếu có file ảnh
-            if (!string.IsNullOrEmpty(filePath))
+
+        [HttpPost("UploadRoomImage/{roomId}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UploadRoomImage([FromRoute] int roomId, [FromForm] IFormFile file)
+        {
+            // Kiểm tra nếu Room có tồn tại trong database
+            var room = await _roomService.GetRoomByIdAsync(roomId);
+            if (room == null)
             {
-                var roomImage = new RoomImageDTO
-                {
-                    RoomId = room.Id,
-                    ImageUrl = filePath
-                };
-                await _roomService.AddRoomImageAsync(roomImage);
+                return NotFound("Room not found.");
             }
 
-            return CreatedAtAction(nameof(GetRoomWithImages), new { id = room.Id }, room);
+            // Lưu ảnh vào server và lấy đường dẫn URL
+            var imageUrl = await _roomService.SaveRoomImageAsync(file);
+            if (imageUrl == null)
+            {
+                return BadRequest("Image upload failed.");
+            }
+
+            // Tạo RoomImageDTO và thêm ảnh cho Room
+            var roomImageDto = new RoomImageDTO
+            {
+                RoomId = roomId,
+                ImageUrl = imageUrl
+            };
+
+            await _roomService.AddRoomImageAsync(roomImageDto);
+
+            // Trả về RoomImageDTO với thông tin của ảnh đã được upload
+            return Ok(roomImageDto);
         }
 
 

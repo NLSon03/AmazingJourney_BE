@@ -28,8 +28,8 @@ namespace AmazingJourney.Application.Services
         public async Task<IEnumerable<RoomDTO>> GetAllRoomsAsync()
         {
             var rooms = await _context.Rooms
-                .Include(r => r.RoomImages) // Tải kèm các ảnh
-                .ToListAsync();
+        .Include(r => r.RoomImages) // Lấy kèm danh sách ảnh
+        .ToListAsync();
 
             return _mapper.Map<IEnumerable<RoomDTO>>(rooms);
         }
@@ -56,15 +56,16 @@ namespace AmazingJourney.Application.Services
             return _mapper.Map<IEnumerable<RoomDTO>>(rooms);
         }
 
-        // Tạo phòng mới
+        // Tạo mới một phòng
         public async Task<RoomDTO> CreateRoomAsync(RoomDTO roomDto)
         {
             var room = _mapper.Map<Room>(roomDto);
-            // Thiết lập thời gian tạo và cập nhật ban đầu
             room.CreatedAt = DateTime.UtcNow;
             room.UpdatedAt = DateTime.UtcNow;
+
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
+
             return _mapper.Map<RoomDTO>(room);
         }
 
@@ -103,7 +104,8 @@ namespace AmazingJourney.Application.Services
             return room == null ? null : _mapper.Map<RoomDTO>(room);
         }
 
-        // Cài đặt phương thức thêm ảnh cho phòng
+        
+        // Thêm ảnh phòng
         public async Task AddRoomImageAsync(RoomImageDTO roomImageDto)
         {
             var roomImage = _mapper.Map<RoomImage>(roomImageDto);
@@ -111,13 +113,14 @@ namespace AmazingJourney.Application.Services
             await _context.SaveChangesAsync();
         }
 
+
+        // Lưu file ảnh lên server
         public async Task<string> SaveRoomImageAsync(IFormFile file)
         {
             if (file.Length > 0)
             {
                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "roomImages");
 
-                // Kiểm tra nếu thư mục không tồn tại thì tạo mới
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);

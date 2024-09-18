@@ -18,11 +18,5 @@ namespace AmazingJourney.Application.DTOs
         public List<RoomDTO> Rooms { get; set; } = new List<RoomDTO>();
     }   
 
-    /*
-    public class HotelImageDTO
-    {
-        public int Id { get; set; }
-        public string ImageUrl { get; set; }
-        public int HotelId { get; set; }
-    }*/
+    
 }

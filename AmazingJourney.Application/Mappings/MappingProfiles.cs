@@ -30,17 +30,16 @@ namespace AmazingJourney.Application.Mappings
             CreateMap<HotelDTO, Hotel>();
             CreateMap<HotelImageDTO, HotelImage>();
 
-            // Room mapping
-            CreateMap<Room, RoomDTO>();
-             //   .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.RoomImages));  // Map hình ảnh phòng
 
-            CreateMap<RoomImage, RoomImageDTO>();
+            // Mapping Room và RoomDTO
+            CreateMap<Room, RoomDTO>()
+                .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.RoomImages));  // Map danh sách ảnh
+
             CreateMap<RoomDTO, Room>();
-            CreateMap<RoomImageDTO, RoomImage>();
 
-            // Map HotelImageDTO to HotelImage entity and vice versa
-            CreateMap<HotelImageDTO, HotelImage>();
-            CreateMap<HotelImage, HotelImageDTO>();
+            // Mapping RoomImage và RoomImageDTO
+            CreateMap<RoomImage, RoomImageDTO>();
+            CreateMap<RoomImageDTO, RoomImage>();
         }
     }
 }

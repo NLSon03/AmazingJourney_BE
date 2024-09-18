@@ -4,33 +4,32 @@ using System.Linq;
 using System.Collections.Generic;
 using AmazingJourney.Application.DTOs;
 
-public class FileUploadOperationFilter : IOperationFilter
+public class SwaggerFileOperationFilter : IOperationFilter
 {
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var fileParameters = context.MethodInfo.GetParameters().Where(p => p.ParameterType == typeof(IFormFile));
+        var fileParameters = context.MethodInfo.GetParameters()
+            .Where(p => p.ParameterType == typeof(IFormFile));
 
-        if (fileParameters.Any())
+        foreach (var fileParameter in fileParameters)
         {
+            operation.Parameters.Clear();
+
             operation.RequestBody = new OpenApiRequestBody
             {
-                Content = new Dictionary<string, OpenApiMediaType>
-                {
+                Content = {
                     ["multipart/form-data"] = new OpenApiMediaType
                     {
                         Schema = new OpenApiSchema
                         {
                             Type = "object",
-                            Properties =
-                            {
-                                ["file"] = new OpenApiSchema
+                            Properties = {
+                                [fileParameter.Name] = new OpenApiSchema
                                 {
                                     Type = "string",
                                     Format = "binary"
-                                },
-                                ["roomDto"] = context.SchemaGenerator.GenerateSchema(typeof(RoomDTO), context.SchemaRepository)
-                            },
-                            Required = new HashSet<string> { "file", "roomDto" }
+                                }
+                            }
                         }
                     }
                 }
