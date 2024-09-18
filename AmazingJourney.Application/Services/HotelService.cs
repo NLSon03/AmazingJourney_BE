@@ -8,6 +8,7 @@ using AmazingJourney.Application.Interfaces;
 using AmazingJourney.Infrastructure.Data;
 using AmazingJourney_BE.AmazingJourney.Domain.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace AmazingJourney.Application.Services
@@ -38,10 +39,10 @@ namespace AmazingJourney.Application.Services
         public async Task<HotelDTO> GetHotelWithImagesByIdAsync(int hotelId)
         {
             var hotel = await _context.Hotels
-         .Include(h => h.HotelImages) // Bao gồm hình ảnh của khách sạn
-         .Include(h => h.Rooms)       // Bao gồm danh sách phòng
-         .ThenInclude(r => r.RoomImages) // Bao gồm hình ảnh của từng phòng
-         .FirstOrDefaultAsync(h => h.Id == hotelId);
+            .Include(h => h.HotelImages) // Bao gồm hình ảnh của khách sạn
+            .Include(h => h.Rooms)       // Bao gồm danh sách phòng
+            .ThenInclude(r => r.RoomImages) // Bao gồm hình ảnh của từng phòng
+            .FirstOrDefaultAsync(h => h.Id == hotelId);
 
             return _mapper.Map<HotelDTO>(hotel);
         }
@@ -56,6 +57,8 @@ namespace AmazingJourney.Application.Services
         public async Task<HotelDTO> CreateHotelAsync(HotelDTO hotelDto)
         {
             var hotel = _mapper.Map<Hotel>(hotelDto);
+            hotel.CreatedAt = DateTime.UtcNow;
+            hotel.UpdatedAt = DateTime.UtcNow;
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
             return _mapper.Map<HotelDTO>(hotel);
@@ -70,6 +73,7 @@ namespace AmazingJourney.Application.Services
                 return null;
 
             _mapper.Map(hotelDto, hotel);
+            hotel.UpdatedAt = DateTime.UtcNow;
             _context.Hotels.Update(hotel);
             await _context.SaveChangesAsync();
 
@@ -120,9 +124,40 @@ namespace AmazingJourney.Application.Services
 
             return _mapper.Map<IEnumerable<HotelDTO>>(hotels);
         }
-        Task<HotelDTO> IHotelService.GetHotelWithImagesByIdAsync(int hotelId)
+
+        public async Task AddHotelImageAsync(HotelImageDTO hotelImageDTO)
         {
-            throw new NotImplementedException();
+            var hotelImage = _mapper.Map<HotelImage>(hotelImageDTO);
+            _context.HotelImages.Add(hotelImage);
+            await _context.SaveChangesAsync();
         }
+        public async Task<string> SaveImageAsync(IFormFile file)
+        {
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "hotelImages");
+
+            // Kiểm tra nếu thư mục upload không tồn tại, thì tạo mới
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Tạo tên file duy nhất để tránh trùng lặp
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            // Lưu file vào đường dẫn
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Trả về đường dẫn tương đối của file để lưu vào database
+            return Path.Combine("hotels", uniqueFileName).Replace("\\", "/");
+        }
+
+        //Task<HotelDTO> IHotelService.GetHotelWithImagesByIdAsync(int hotelId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -24,10 +24,9 @@ namespace AmazingJourney.Application.Mappings
             // Hotel mapping
             CreateMap<Hotel, HotelDTO>()
                 .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.HotelImages))
-                .ForMember(dest => dest.Rooms, opt => opt.MapFrom(src => src.Rooms));  // Map phòng
-
-            CreateMap<HotelImage, HotelImageDTO>();
+                .ForMember(dest => dest.Rooms, opt => opt.MapFrom(src => src.Rooms)); // Map phòng
             CreateMap<HotelDTO, Hotel>();
+            CreateMap<HotelImage, HotelImageDTO>();
             CreateMap<HotelImageDTO, HotelImage>();
 
 

@@ -31,7 +31,7 @@ namespace AmazingJourney.Application.Services
         .Include(r => r.RoomImages) // Lấy kèm danh sách ảnh
         .ToListAsync();
 
-            return _mapper.Map<IEnumerable<RoomDTO>>(rooms);
+    return _mapper.Map<IEnumerable<RoomDTO>>(rooms);
         }
 
         // Lấy phòng cụ thể theo ID kèm hình ảnh

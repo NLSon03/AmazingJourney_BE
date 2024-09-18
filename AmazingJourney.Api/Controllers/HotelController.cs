@@ -1,5 +1,6 @@
 ﻿using AmazingJourney.Application.DTOs;
 using AmazingJourney.Application.Interfaces;
+using AmazingJourney.Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +49,7 @@ namespace AmazingJourney.Api.Controllers
         }
 
         // POST: api/Hotel
-        [HttpPost]
+        [HttpPost("CreateHotel")]
         public async Task<IActionResult> CreateHotel([FromBody] HotelDTO hotelDto)
         {
             if (!ModelState.IsValid)
@@ -57,7 +58,8 @@ namespace AmazingJourney.Api.Controllers
             try
             {
                 var hotel = await _hotelService.CreateHotelAsync(hotelDto);
-                return CreatedAtAction(nameof(GetHotelById), new { id = hotel.Id }, hotel);
+                return Ok(hotel);
+                //return CreatedAtAction(nameof(GetHotelById), new { id = hotel.Id }, hotel);
             }
             catch (Exception ex)
 
@@ -68,7 +70,37 @@ namespace AmazingJourney.Api.Controllers
             }
         }
 
-      
+        [HttpPost("UploadHotelImage/{hotelId}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UploadHotelImage([FromRoute] int hotelId, [FromForm] IFormFile file)
+        {
+            // Kiểm tra nếu Hotel có tồn tại trong database
+            var hotel = await _hotelService.GetHotelByIdAsync(hotelId);
+            if (hotel == null)
+            {
+                return NotFound("Hotel not found!");
+            }
+
+            // Lưu ảnh vào server và lấy đường dẫn URL
+            var imageUrl = await _hotelService.SaveImageAsync(file);
+            if (imageUrl == null)
+            {
+                return BadRequest("Image upload failed.");
+            }
+
+            // Tạo HotelImageDTO và thêm ảnh cho Hotel
+            var hotelImageDTO = new HotelImageDTO
+            {
+                HotelId = hotelId,
+                ImageUrl = imageUrl
+            };
+
+            await _hotelService.AddHotelImageAsync(hotelImageDTO);
+
+            // Trả về HotelImageDTO với thông tin của ảnh đã được upload
+            return Ok(hotelImageDTO);
+        }
+
 
         // PUT: api/Hotel/5
         [HttpPut("{id}")]

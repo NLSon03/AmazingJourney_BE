@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AmazingJourney.Application.DTOs;
+using Microsoft.AspNetCore.Http;
 
 namespace AmazingJourney.Application.Interfaces
 {
@@ -21,5 +22,9 @@ namespace AmazingJourney.Application.Interfaces
         Task<HotelDTO> CreateHotelAsync(HotelDTO hotelDto);
         Task<HotelDTO> UpdateHotelAsync(int id, HotelDTO hotelDto);
         Task<bool> DeleteHotelAsync(int id);
+
+        Task<string> SaveImageAsync(IFormFile file);
+
+        Task  AddHotelImageAsync(HotelImageDTO hotelImageDto);
     }
 }

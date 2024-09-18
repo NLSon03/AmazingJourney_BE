@@ -63,7 +63,7 @@ namespace AmazingJourney.Application.Services
         }
         public async Task<string> SaveImageAsync(IFormFile file)
         {
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "hotelImages");
 
             // Kiểm tra nếu thư mục upload không tồn tại, thì tạo mới
             if (!Directory.Exists(uploadsFolder))
@@ -80,9 +80,9 @@ namespace AmazingJourney.Application.Services
             {
                 await file.CopyToAsync(fileStream);
             }
-
+        
             // Trả về đường dẫn tương đối của file để lưu vào database
-            return Path.Combine("images", uniqueFileName).Replace("\\", "/");
+            return Path.Combine("hotels", uniqueFileName).Replace("\\", "/");
         }
         /*  public async Task<string> SaveImageAsync(IFormFile file)
           {

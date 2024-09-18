@@ -25,7 +25,7 @@ namespace AmazingJourney.Api.Controllers
         }
 
         // Lấy phòng cụ thể theo ID kèm hình ảnh
-        [HttpGet("{id}/with-images")]
+        [HttpGet("with-images/{id}")]
         public async Task<IActionResult> GetRoomWithImages(int id)
         {
             var room = await _roomService.GetRoomWithImagesByIdAsync(id);
