@@ -21,11 +21,17 @@ namespace AmazingJourney.Application.Mappings
             CreateMap<LocationDTO, Location>();
             CreateMap<Location, LocationDTO>();
 
-            // Hotel mapping
+            CreateMap<HotelDTO, Hotel>()
+      // Chỉ map Rooms nếu Rooms != null và các giá trị hợp lệ
+      .ForMember(dest => dest.Rooms, opt => opt.Condition(src => src.Rooms != null && src.Rooms.Any(r => r.Id != 0)))
+      // Chỉ map HotelImages nếu Images != null và các giá trị hợp lệ
+      .ForMember(dest => dest.HotelImages, opt => opt.Condition(src => src.Images != null && src.Images.Any(img => img.Id != 0)));  // Map HotelImages
+
             CreateMap<Hotel, HotelDTO>()
                 .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.HotelImages))
-                .ForMember(dest => dest.Rooms, opt => opt.MapFrom(src => src.Rooms)); // Map phòng
-            CreateMap<HotelDTO, Hotel>();
+                .ForMember(dest => dest.Rooms, opt => opt.MapFrom(src => src.Rooms));  // Map danh sách phòng khi get
+
+
             CreateMap<HotelImage, HotelImageDTO>();
             CreateMap<HotelImageDTO, HotelImage>();
 

@@ -59,6 +59,11 @@ namespace AmazingJourney.Application.Services
             var hotel = _mapper.Map<Hotel>(hotelDto);
             hotel.CreatedAt = DateTime.UtcNow;
             hotel.UpdatedAt = DateTime.UtcNow;
+            // Kiểm tra nếu không có Rooms thì không tự động tạo Rooms trống
+            if (hotelDto.Rooms == null || !hotelDto.Rooms.Any())
+            {
+                hotel.Rooms = new List<Room>();  // Không để Room tự động được tạo
+            }
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
             return _mapper.Map<HotelDTO>(hotel);

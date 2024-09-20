@@ -11,7 +11,6 @@ namespace AmazingJourney.Application.DTOs
     {
         [Required]
         public int Id { get; set; }
-
         [Required]
         public int HotelId { get; set; }
 

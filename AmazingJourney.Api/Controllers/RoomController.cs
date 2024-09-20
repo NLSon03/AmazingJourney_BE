@@ -37,7 +37,7 @@ namespace AmazingJourney.Api.Controllers
         }
 
         // Lấy danh sách phòng theo HotelId
-        [HttpGet("by-hotel/{hotelId}")]
+        [HttpGet("SearchRoomsByHotelId/{hotelId}")]
         public async Task<IActionResult> GetRoomsByHotelId(int hotelId)
         {
             var rooms = await _roomService.GetRoomsByHotelIdAsync(hotelId);
