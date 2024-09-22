@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Api", "AmazingJourney.Api\AmazingJourney.Api.csproj", "{2C659C5D-DD5D-4669-BE3B-1B463819A505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Api", "AmazingJourney.Api\AmazingJourney.Api.csproj", "{2C659C5D-DD5D-4669-BE3B-1B463819A505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Application", "AmazingJourney.Application\AmazingJourney.Application.csproj", "{52273076-19C8-491D-A035-5E62E51EC6D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Application", "AmazingJourney.Application\AmazingJourney.Application.csproj", "{52273076-19C8-491D-A035-5E62E51EC6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Domain", "AmazingJourney.Domain\AmazingJourney.Domain.csproj", "{240C2E20-0011-4934-A804-2404FE8C9DB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Domain", "AmazingJourney.Domain\AmazingJourney.Domain.csproj", "{240C2E20-0011-4934-A804-2404FE8C9DB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Infrastructure", "AmazingJourney.Infrastructure\AmazingJourney.Infrastructure.csproj", "{B606EC3F-80C5-4183-8FD1-1D362D2E920E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Infrastructure", "AmazingJourney.Infrastructure\AmazingJourney.Infrastructure.csproj", "{B606EC3F-80C5-4183-8FD1-1D362D2E920E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Tests.Unit", "AmazingJourney.Tests.Unit\AmazingJourney.Tests.Unit.csproj", "{BEB523D0-B14B-40F1-8A5D-BEE884242771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Tests.Unit", "AmazingJourney.Tests.Unit\AmazingJourney.Tests.Unit.csproj", "{BEB523D0-B14B-40F1-8A5D-BEE884242771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmazingJourney.Tests.Integration", "AmazingJourney.Tests.Integration\AmazingJourney.Tests.Integration.csproj", "{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmazingJourney.Tests.Integration", "AmazingJourney.Tests.Integration\AmazingJourney.Tests.Integration.csproj", "{8C49D9C3-B640-4A78-9CFB-3FEA707E08AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
