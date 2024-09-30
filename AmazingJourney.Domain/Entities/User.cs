@@ -1,11 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
 {
-    public class User
+    public class User : IdentityUser
+    {
+        [StringLength(50)]
+        public string? FullName { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
+    /*public class User
     {
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [StringLength(50)]
         public string? Username { get; set; }
@@ -21,5 +29,5 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         public string? Role { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-    }
+    }*/
 }
