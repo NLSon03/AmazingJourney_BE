@@ -10,6 +10,7 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         public int RoomId { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
+        [Range(0, double.MaxValue)]
         public decimal TotalPrice { get; set; }
         public string? Status { get; set; }
         public DateTime CreatedAt { get; set; }
