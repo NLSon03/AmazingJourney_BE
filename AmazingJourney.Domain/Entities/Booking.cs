@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
 {
@@ -15,10 +16,12 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         public string? Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public int Capacity { get; set; }
 
         // Navigation properties
         public User? User { get; set; }
         public Room? Room { get; set; }
         public Payment? Payment { get; set; }
+       
     }
 }

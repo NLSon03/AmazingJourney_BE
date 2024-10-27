@@ -27,6 +27,8 @@ builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IHotelImageService, HotelImageService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
 
 // Add services to the container.
 builder.Services.AddControllers();

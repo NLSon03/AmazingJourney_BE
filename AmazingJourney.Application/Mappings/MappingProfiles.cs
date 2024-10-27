@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AmazingJourney.Application.DTOs;
 using AmazingJourney_BE.AmazingJourney.Domain.Entities;
+using AmazingJourney_BE.AmazingJourney.DTOs;
 using AutoMapper;
 
 namespace AmazingJourney.Application.Mappings
@@ -45,6 +46,14 @@ namespace AmazingJourney.Application.Mappings
             // Mapping RoomImage và RoomImageDTO
             CreateMap<RoomImage, RoomImageDTO>();
             CreateMap<RoomImageDTO, RoomImage>();
+            // Ánh xạ từ BookingCreateDTO sang Booking
+            CreateMap<BookingCreateDTO, Booking>()
+                .ForMember(dest => dest.UserId, opt => opt.Ignore()) // UserId sẽ được lấy từ người dùng đăng nhập
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+
+            // Ánh xạ từ Booking sang BookingDTO
+            CreateMap<Booking, BookingDTO>();
         }
     }
 }

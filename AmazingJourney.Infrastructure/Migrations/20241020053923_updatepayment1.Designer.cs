@@ -4,6 +4,7 @@ using AmazingJourney.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AmazingJourney.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241020053923_updatepayment1")]
+    partial class updatepayment1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,9 +62,6 @@ namespace AmazingJourney.Infrastructure.Migrations
 
                     b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("paymentMethod")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -194,6 +194,9 @@ namespace AmazingJourney.Infrastructure.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BookingId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("Method")
                         .HasColumnType("int");
 
@@ -205,8 +208,11 @@ namespace AmazingJourney.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId")
-                        .IsUnique();
+                    b.HasIndex("BookingId");
+
+                    b.HasIndex("BookingId1")
+                        .IsUnique()
+                        .HasFilter("[BookingId1] IS NOT NULL");
 
                     b.ToTable("Payments");
                 });
@@ -561,10 +567,14 @@ namespace AmazingJourney.Infrastructure.Migrations
             modelBuilder.Entity("AmazingJourney_BE.AmazingJourney.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("AmazingJourney_BE.AmazingJourney.Domain.Entities.Booking", "Booking")
-                        .WithOne("Payment")
-                        .HasForeignKey("AmazingJourney_BE.AmazingJourney.Domain.Entities.Payment", "BookingId")
+                        .WithMany("Payments")
+                        .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("AmazingJourney_BE.AmazingJourney.Domain.Entities.Booking", null)
+                        .WithOne("Payment")
+                        .HasForeignKey("AmazingJourney_BE.AmazingJourney.Domain.Entities.Payment", "BookingId1");
 
                     b.Navigation("Booking");
                 });
@@ -660,6 +670,8 @@ namespace AmazingJourney.Infrastructure.Migrations
             modelBuilder.Entity("AmazingJourney_BE.AmazingJourney.Domain.Entities.Booking", b =>
                 {
                     b.Navigation("Payment");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("AmazingJourney_BE.AmazingJourney.Domain.Entities.Category", b =>

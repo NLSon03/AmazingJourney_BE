@@ -20,5 +20,7 @@ namespace AmazingJourney.Infrastructure.Data
         public DbSet<RoomImage> RoomImages { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Location> Locations { get; set; }
+
+      
     }
 }

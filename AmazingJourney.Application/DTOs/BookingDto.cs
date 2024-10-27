@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using AmazingJourney_BE.AmazingJourney.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,10 @@ namespace AmazingJourney_BE.AmazingJourney.DTOs
         public int RoomId { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
+        public int Capacity { get; set; }
+       
+
+
         // Thông tin người dùng sẽ được lấy từ người đang đăng nhập
     }
 
@@ -25,6 +31,8 @@ namespace AmazingJourney_BE.AmazingJourney.DTOs
         public string? Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public int Capacity { get; set; }
+
     }
 }
 
