@@ -10,6 +10,12 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         [StringLength(50)]
         public string? City { get; set; }
 
+        [StringLength(200)]
+        public string? Longtitude { get; set; }
+
+        [StringLength(200)]
+        public string? Latitude { get; set;}
+
         [StringLength(50)]
         public string? Nation { get; set; }
         public ICollection<Hotel>? Hotels { get; set; }

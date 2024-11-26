@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AmazingJourney.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initDB : Migration
+    public partial class initdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,8 @@ namespace AmazingJourney.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Longtitude = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Latitude = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Nation = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
@@ -67,9 +69,9 @@ namespace AmazingJourney.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: true),
+                    LocationId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     Amenities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -88,7 +90,8 @@ namespace AmazingJourney.Infrastructure.Migrations
                         name: "FK_Hotels_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,7 +147,7 @@ namespace AmazingJourney.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HotelId = table.Column<int>(type: "int", nullable: false),
-                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoomType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PricePerNight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Availability = table.Column<bool>(type: "bit", nullable: false),

@@ -10,6 +10,10 @@ namespace AmazingJourney.Application.DTOs
     {
         public int Id { get; set; }
         public string? City { get; set; }
+
+        public string? Longtitude { get; set; }
+
+        public string? Latitude { get; set; }
         public string? Nation { get; set; }
     }
 }

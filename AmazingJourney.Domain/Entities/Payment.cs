@@ -11,6 +11,8 @@ namespace AmazingJourney_BE.AmazingJourney.Domain.Entities
         [StringLength(50)]
         public string? PaymentMethod { get; set; }
         public decimal Amount { get; set; }
+
+    
         public DateTime PaymentDate { get; set; }
         public string? Status { get; set; }
 
